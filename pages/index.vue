@@ -1,7 +1,7 @@
 <template>
   <div class="flight-departures-board">
     <DeparturesHeader />
-    <DeparturesTable />
+    <DeparturesTable :flights="flights" />
   </div>
 </template>
 
@@ -15,6 +15,24 @@ export default {
     DeparturesHeader,
     DeparturesTable
   },
+  data() {
+    return {
+      flights: []
+    }
+  },
+  mounted() {
+    this.getAllDepartures()
+  },
+  methods: {
+    async getAllDepartures() {
+      try {
+        const response = await this.$axios.$get('https://6315ae3e5b85ba9b11e4cb85.mockapi.io/departures/Flightdata')
+        this.flights = response.allDepartures
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  }
 }
 </script>
 

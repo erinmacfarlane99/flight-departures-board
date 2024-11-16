@@ -5,36 +5,48 @@
       <span class="departures-table__header__item">City Name</span>
       <span class="departures-table__header__item">Code</span>
       <span class="departures-table__header__item">Airline</span>
-      <span class="departures-table__header__item">Gate</span>  
+      <span class="departures-table__header__item">Gate</span>
       <span class="departures-table__header__item">Status</span>
     </div>
 
-    <div class="departures-table__flight departures-table__row">
-      <span class="departures-table__flight__item">06.55</span>
-      <span class="departures-table__flight__item--highlight">Toronto</span>
-      <span class="departures-table__flight__item">YYZ</span>
-      <span class="departures-table__flight__item">Air Canada</span>
-      <span class="departures-table__flight__item--highlight">A4</span>
-      <span class="departures-table__flight__item">Flight closing</span>
+    <div v-for="(flight, index) in flights" :key="index" class="departures-table__flight departures-table__row">
+      <span class="departures-table__flight__item">{{ formatTime(flight.scheduledDepartureDateTime) }}</span>
+      <span class="departures-table__flight__item--highlight">{{ flight.arrivalAirport.cityName }}</span>
+      <span class="departures-table__flight__item">{{ flight.arrivalAirport.code }}</span>
+      <span class="departures-table__flight__item">{{ flight.airline.name }}</span>
+      <span class="departures-table__flight__item--highlight"> {{ flight.departureGate?.number }}</span>
+      <span class="departures-table__flight__item"><FlightStatus :status="flight.status" /></span>
     </div>
   </div>
 </template>
 
 <script>
- export default {
-   name: 'DeparturesTable'
- }
+export default {
+  name: 'DeparturesTable',
+  props: {
+    flights: {
+      type: Array,
+      default: () => []
+    }
+  },
+  methods: {
+    formatTime(dateString) {
+      const date = new Date(dateString)
+      return date.toTimeString().slice(0, 5)
+    }
+  }
+}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .departures-table {
   padding: 10px 40px;
   background: $background-gradient;
 
   &__header {
     background: $table-header-gradient;
-    font-size: 0.8rem;
-    padding: 10px 40px;
+    font-size: 0.9rem;
+    padding: 10px 50px;
   }
 
   &__row {
@@ -45,9 +57,10 @@
   }
 
   &__flight {
-    padding: 20px 40px;
+    padding: 20px 50px;
     border: 1px solid #fff;
     margin-top: 10px;
+    align-items: center;
 
     &__item {
       color: #fff;

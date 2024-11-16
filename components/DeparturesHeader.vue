@@ -1,18 +1,17 @@
 <template>
   <div class="departures-header">
-    <img class="departures-header__logo" src="~assets/icons/flightLogo.png" alt="Flight Icon">
+    <img class="departures-header__logo" src="~assets/icons/flightLogo.png" alt="Flight Icon" />
     <h1>Departures</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'DeparturesHeader',
+  name: 'DeparturesHeader'
 }
 </script>
 
 <style lang="scss">
-
 .departures-header {
   display: flex;
   align-items: center;

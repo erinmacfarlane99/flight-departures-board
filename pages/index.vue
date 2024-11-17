@@ -2,6 +2,7 @@
   <div class="flight-departures-board">
     <DeparturesHeader />
     <DeparturesTable :flights="flights" />
+    <UpdateStatusForm :flights="flights" @update-flights="updateFlights" />
   </div>
 </template>
 
@@ -31,6 +32,9 @@ export default {
       } catch (error) {
         console.error(error)
       }
+    },
+    updateFlight(updatedFlights) {
+      this.flights = updatedFlights
     }
   }
 }
@@ -38,6 +42,8 @@ export default {
 
 <style lang="scss">
 .flight-departures-board {
-  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

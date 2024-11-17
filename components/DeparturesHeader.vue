@@ -13,6 +13,7 @@ export default {
 
 <style lang="scss">
 .departures-header {
+  width: 100%;
   display: flex;
   align-items: center;
   background-color: $primary-color;

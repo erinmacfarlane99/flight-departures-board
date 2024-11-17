@@ -1,6 +1,6 @@
 <template>
   <div class="departures-header">
-    <img class="departures-header__logo" src="~assets/icons/flightLogo.png" alt="Flight Icon" />
+    <img class="departures-header__icon" src="~assets/icons/flightIcon.png" alt="Flight Icon" />
     <h1>Departures</h1>
   </div>
 </template>
@@ -22,9 +22,9 @@ export default {
   gap: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
 
-  &__logo {
-    width: auto;
-    height: 40px;
+  &__icon {
+    width: 40px;
+    height: auto;
   }
 }
 </style>

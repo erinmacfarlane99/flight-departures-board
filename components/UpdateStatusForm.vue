@@ -44,7 +44,7 @@
             v-model="customStatus"
             class="update-status-form__status-input"
             type="text"
-            maxlength="25"
+            maxlength="20"
             placeholder="Enter custom status"
           />
         </div>
@@ -142,6 +142,11 @@ export default {
     &:hover {
       background-color: #ddbc4e;
     }
+  }
+
+  @include breakpoint('small') {
+    padding: 20px;
+    margin: 20px;
   }
 }
 </style>

@@ -74,6 +74,8 @@ export default {
   padding: 10px 18px 10px 10px;
   min-width: 160px;
   width: auto;
+  max-width: 100%;
+  overflow: hidden;
 
   &--red {
     border-left-color: $status-red;
@@ -91,6 +93,12 @@ export default {
 
   &--blue {
     border-left-color: $status-blue;
+  }
+
+  @include breakpoint('small') {
+    padding: 6px 18px 6px 10px;
+
+    margin-top: 10px;
   }
 }
 </style>

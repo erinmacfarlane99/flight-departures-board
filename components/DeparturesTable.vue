@@ -14,7 +14,12 @@
       <span class="departures-table__cell--highlight">{{ flight.arrivalAirport.cityName }}</span>
       <span class="departures-table__cell">{{ flight.arrivalAirport.code }}</span>
       <span class="departures-table__cell">{{ flight.airline.name }}</span>
-      <span class="departures-table__cell--highlight"> {{ flight.departureGate?.number }}</span>
+      <span
+        class="departures-table__cell--highlight departures-table__gate-cell"
+        :class="{ 'departures-table__gate-cell--hidden': !flight.departureGate?.number }"
+      >
+        {{ flight.departureGate?.number }}</span
+      >
       <span class="departures-table__cell"><FlightStatus :status="flight.status" /></span>
     </div>
   </div>
@@ -51,9 +56,10 @@ export default {
 
   &__row {
     display: grid;
-    grid-template-columns: 18.37% 20.41% 10.2% 20.41% 10.2% 20.41%;
+    grid-template-columns: 15% 20% 10% 20% 10% 25%;
     border-radius: $border-radius;
     gap: 10px;
+    overflow: hidden;
   }
 
   &__flight {
@@ -68,6 +74,47 @@ export default {
 
     &--highlight {
       color: $primary-color;
+    }
+  }
+
+  @include breakpoint('small') {
+    .departures-table__header {
+      display: none;
+    }
+
+    &__flight {
+      display: block;
+      padding: 10px 20px;
+    }
+
+    &__cell {
+      display: block;
+    }
+
+    .departures-table__gate-cell::before {
+      content: 'Gate ';
+    }
+
+    &__gate-cell {
+      &--hidden {
+        display: none;
+      }
+    }
+
+    &__cell:first-child {
+      justify-self: end;
+    }
+  }
+
+  @include breakpoint('medium') {
+    padding: 10px;
+    &__row {
+      grid-template-columns: 15% 20% 23% 9% 28%;
+    }
+
+    &__cell:nth-child(3),
+    &__header span:nth-child(3) {
+      display: none;
     }
   }
 }

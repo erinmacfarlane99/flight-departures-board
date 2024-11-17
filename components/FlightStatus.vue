@@ -98,7 +98,7 @@ export default {
   @include breakpoint('small') {
     padding: 6px 18px 6px 10px;
 
-    margin-top: 10px;
+    margin-top: 6px;
   }
 }
 </style>

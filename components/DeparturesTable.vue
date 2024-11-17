@@ -102,7 +102,7 @@ export default {
     }
 
     &__cell:first-child {
-      justify-self: end;
+      text-align: right;
     }
   }
 

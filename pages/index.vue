@@ -14,7 +14,7 @@
 
     <div v-else-if="flights.length > 0" class="flight-departures-board__table-form-container">
       <DeparturesTable :flights="flights" />
-      <UpdateStatusForm :flights="flights" @update-flights="updateFlights" />
+      <UpdateStatusForm :flights="flights" @update-flight-status="updateFlightStatus" />
     </div>
   </div>
 </template>
@@ -22,12 +22,14 @@
 <script>
 import DeparturesHeader from '~/components/DeparturesHeader'
 import DeparturesTable from '~/components/DeparturesTable'
+import UpdateStatusForm from '~/components/UpdateStatusForm'
 
 export default {
   name: 'FlightDeparturesBoard',
   components: {
     DeparturesHeader,
-    DeparturesTable
+    DeparturesTable,
+    UpdateStatusForm
   },
   data() {
     return {
@@ -42,17 +44,18 @@ export default {
   methods: {
     async getAllDepartures() {
       try {
-        this.loading = true
+        // Make API call to get flight data
         const response = await this.$axios.$get('https://6315ae3e5b85ba9b11e4cb85.mockapi.io/departures/Flightdata')
-        setTimeout(() => {
-          this.flights = response.allDepartures
-          this.loading = false
-        }, 600)
+
+        // Populate the flights array with the API response
+        this.flights = response.allDepartures
+        this.loading = false
       } catch (error) {
         this.error = true
       }
     },
-    updateFlight(updatedFlights) {
+    // Update flight status in the flights array when the form is submitted
+    updateFlightStatus(updatedFlights) {
       this.flights = updatedFlights
     }
   }

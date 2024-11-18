@@ -3,22 +3,26 @@
     <div class="departures-table__header departures-table__row">
       <span>Departure Time</span>
       <span>City Name</span>
-      <span>Code</span>
+      <span class="departures-table__code-title">Code</span>
       <span>Airline</span>
       <span>Gate</span>
       <span>Status</span>
     </div>
 
     <div v-for="(flight, index) in flights" :key="index" class="departures-table__flight departures-table__row">
-      <span class="departures-table__cell">{{ formatTime(flight.scheduledDepartureDateTime) }}</span>
-      <span class="departures-table__cell--highlight">{{ flight.arrivalAirport.cityName }}</span>
-      <span class="departures-table__cell">{{ flight.arrivalAirport.code }}</span>
-      <span class="departures-table__cell">{{ flight.airline.name }}</span>
+      <span class="departures-table__cell departures-table__time-cell">
+        {{ formatTime(flight.scheduledDepartureDateTime) }}</span
+      >
+      <span class="departures-table__cell--highlight departures-table__city-cell">
+        {{ flight.arrivalAirport.cityName }}</span
+      >
+      <span class="departures-table__cell departures-table__code-cell">{{ flight.arrivalAirport.code }}</span>
+      <span class="departures-table__cell departures-table__airline-cell">{{ flight.airline.name }}</span>
       <span
         class="departures-table__cell--highlight departures-table__gate-cell"
-        :class="{ 'departures-table__gate-cell--hidden': !flight.departureGate?.number }"
+        :class="{ 'departures-table__gate-cell--hidden': !flight.departureGate }"
       >
-        {{ flight.departureGate?.number }}</span
+        {{ flight.departureGate ? flight.departureGate.number : '' }}</span
       >
       <span class="departures-table__cell"><FlightStatus :status="flight.status" /></span>
     </div>
@@ -27,9 +31,13 @@
 
 <script>
 import { formatTime } from '~/helpers/formatTime'
+import FlightStatus from '~/components/FlightStatus'
 
 export default {
   name: 'DeparturesTable',
+  components: {
+    FlightStatus
+  },
   props: {
     flights: {
       type: Array,
@@ -95,10 +103,8 @@ export default {
       content: 'Gate ';
     }
 
-    &__gate-cell {
-      &--hidden {
-        display: none;
-      }
+    &__gate-cell--hidden {
+      display: none;
     }
 
     &__cell:first-child {
@@ -112,8 +118,8 @@ export default {
       grid-template-columns: 15% 20% 23% 9% 28%;
     }
 
-    &__cell:nth-child(3),
-    &__header span:nth-child(3) {
+    &__code-cell,
+    &__code-title {
       display: none;
     }
   }

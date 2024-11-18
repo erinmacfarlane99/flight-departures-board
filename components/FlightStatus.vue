@@ -22,9 +22,11 @@ export default {
     }
   },
   computed: {
+    // Convert status to lowercase for comparison
     normalisedStatus() {
       return this.status.toLowerCase()
     },
+    // Determine the status color based on the status
     statusColor() {
       if (this.isGreenStatus()) {
         return 'green'
@@ -33,9 +35,10 @@ export default {
       } else if (this.isRedStatus()) {
         return 'red'
       } else {
-        return 'blue'
+        return 'blue' // Default to blue if no specific color is matched
       }
     },
+    // Remove gate number from status text
     statusText() {
       if (this.normalisedStatus.includes('final call')) {
         return 'Final Call'
@@ -47,6 +50,7 @@ export default {
     }
   },
   methods: {
+    // Check status colors based on the status text
     isGreenStatus() {
       return this.normalisedStatus.includes('departed')
     },

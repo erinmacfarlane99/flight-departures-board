@@ -52,6 +52,7 @@
     </div>
 
     <button class="update-status-form__submit-button" type="submit">Update Status</button>
+    <span v-if="errorMessage" class="update-status-form__error-message">{{ errorMessage }}</span>
   </form>
 </template>
 
@@ -70,28 +71,42 @@ export default {
     return {
       selectedFlightId: null,
       newStatus: '',
-      customStatus: ''
+      customStatus: '',
+      errorMessage: ''
+    }
+  },
+  watch: {
+    // Reset error message when selected flight or status changes
+    selectedFlightId() {
+      this.errorMessage = ''
+    },
+    newStatus() {
+      this.errorMessage = ''
     }
   },
   methods: {
     formatTime,
     updateFlightStatus() {
+      // Make a copy of the flights array to avoid mutating the prop directly
       const updatedFlights = [...this.flights]
 
+      // Find the selected flight by id
       const selectedFlight = updatedFlights.find((flight) => flight.flightNumber === this.selectedFlightId)
 
       if (selectedFlight && this.newStatus) {
+        // Update the status of the selected flight
         const statusToUpdate = this.newStatus === 'Other' ? this.customStatus : this.newStatus
-
         selectedFlight.status = statusToUpdate
 
+        // Emit updated flights with new status to parent
         this.$emit('update-flight-status', updatedFlights)
 
+        // Clear form
         this.selectedFlightId = null
         this.newStatus = ''
         this.customStatus = ''
       } else {
-        alert('Please select a flight and status.')
+        this.errorMessage = 'Please select a flight and status'
       }
     }
   }
@@ -142,6 +157,11 @@ export default {
     &:hover {
       background-color: #ddbc4e;
     }
+  }
+
+  &__error-message {
+    color: $status-red;
+    text-align: center;
   }
 
   @include breakpoint('small') {

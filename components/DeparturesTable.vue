@@ -93,6 +93,7 @@ export default {
     }
   }
 
+  // Hide header on small sreens and display as cards
   @include breakpoint('small') {
     .departures-table__header {
       display: none;
@@ -107,6 +108,7 @@ export default {
       display: block;
     }
 
+    // Add "Gate " prefix to gate number when on a small screen as no header
     .departures-table__gate-cell::before {
       content: 'Gate ';
     }
@@ -120,6 +122,7 @@ export default {
     }
   }
 
+  // Remove airport code from table on medium screens
   @include breakpoint('medium') {
     padding: 10px;
     &__row {

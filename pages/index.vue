@@ -47,14 +47,14 @@ export default {
         // Make API call to get flight data
         const response = await this.$axios.$get('https://6315ae3e5b85ba9b11e4cb85.mockapi.io/departures/Flightdata')
 
-        // Populate the flights array with the API response
+        // Populate the flights array with the API response and stop loading
         this.flights = response.allDepartures
         this.loading = false
       } catch (error) {
         this.error = true
       }
     },
-    // Update flight status in the flights array when the form is submitted
+    // Update flights array when UpdateStatusForm emits updated flights with new status
     updateFlightStatus(updatedFlights) {
       this.flights = updatedFlights
     }

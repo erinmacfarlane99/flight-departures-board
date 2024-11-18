@@ -98,10 +98,9 @@ export default {
         const statusToUpdate = this.newStatus === 'Other' ? this.customStatus : this.newStatus
         selectedFlight.status = statusToUpdate
 
-        // Emit updated flights with new status to parent
+        // Emit updated flights with new status to index page
         this.$emit('update-flight-status', updatedFlights)
 
-        // Clear form
         this.selectedFlightId = null
         this.newStatus = ''
         this.customStatus = ''
@@ -141,6 +140,7 @@ export default {
     font-weight: 500;
   }
 
+  // Make radio buttons black
   input[type='radio'] {
     accent-color: #000;
   }

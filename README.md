@@ -1,68 +1,43 @@
-# flight-departures-board
+# CAVU Technical Task
 
-## Build Setup
+A flight departures board written using Vue 2.
+
+## Run Locally
+
+Clone the project.
+
+Install dependencies
 
 ```bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
+  npm install
 ```
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+Start the server
 
-## Special Directories
+```bash
+  npm run dev
+```
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+Run tests
 
-### `assets`
+```bash
+  npm run test
+```
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+## External Packages
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
+- axios: JavaScript library for making HTTP requests. I chose it over fetch for its ease of use and integration with Nuxt.js.
+- SCSS: I chose SCSS because I'm comfortable with its syntax and it provides features like variables, nesting, and mixins that help keep styles organised and maintainable.
+- @nuxtjs/style-resources: I used this to manage global SASS resources (variables, mixins).
 
-### `components`
+## Additional Comments
 
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
+I don't usually add comments to my code but I wanted to add some comments to this project to help reviewers understand the code better.
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
+This code is intended to be run locally and does not involve any sensitive data. While there are some known vulnerabilities in the dependencies (as reported by `npm audit`), they don't pose a significant risk in the local environment.
 
-### `layouts`
+Given more time, I would've liked to improve:
 
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+- Accessibility: I decided to use a grid layout for the departures table as the gradient and border radius was quite hard to get correct across browsers. However I know this is not the most accessible but I have added aria labels and roles to the custom table to try make it a bit better.
+- Responsiveness: I would like to improve the card layout on smaller screens to utilise more of the right side.
+- Cross Browser Compatibility: For the form component, I could improve the dropdown and radio buttons by styling them to be more consistent across browsers.

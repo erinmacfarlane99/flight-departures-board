@@ -1,30 +1,38 @@
 <template>
-  <div class="departures-table">
-    <div class="departures-table__header departures-table__row">
-      <span>Departure Time</span>
-      <span>City Name</span>
-      <span class="departures-table__code-title">Code</span>
-      <span>Airline</span>
-      <span>Gate</span>
-      <span>Status</span>
+  <div class="departures-table" role="table" aria-label="FlightDepartures Table">
+    <div class="departures-table__header departures-table__row" role="row">
+      <span role="columnheader">Departure Time</span>
+      <span role="columnheader">City Name</span>
+      <span class="departures-table__code-title" role="columnheader">Code</span>
+      <span role="columnheader">Airline</span>
+      <span role="columnheader">Gate</span>
+      <span role="columnheader">Status</span>
     </div>
 
-    <div v-for="(flight, index) in flights" :key="index" class="departures-table__flight departures-table__row">
-      <span class="departures-table__cell departures-table__time-cell">
-        {{ formatTime(flight.scheduledDepartureDateTime) }}</span
-      >
-      <span class="departures-table__cell--highlight departures-table__city-cell">
-        {{ flight.arrivalAirport.cityName }}</span
-      >
-      <span class="departures-table__cell departures-table__code-cell">{{ flight.arrivalAirport.code }}</span>
-      <span class="departures-table__cell departures-table__airline-cell">{{ flight.airline.name }}</span>
+    <div
+      v-for="(flight, index) in flights"
+      :key="index"
+      class="departures-table__flight departures-table__row"
+      role="row"
+    >
+      <span class="departures-table__cell departures-table__time-cell" role="cell">{{
+        formatTime(flight.scheduledDepartureDateTime)
+      }}</span>
+      <span class="departures-table__cell--highlight departures-table__city-cell" role="cell">{{
+        flight.arrivalAirport.cityName
+      }}</span>
+      <span class="departures-table__cell departures-table__code-cell" role="cell">{{
+        flight.arrivalAirport.code
+      }}</span>
+      <span class="departures-table__cell departures-table__airline-cell" role="cell">{{ flight.airline.name }}</span>
       <span
         class="departures-table__cell--highlight departures-table__gate-cell"
         :class="{ 'departures-table__gate-cell--hidden': !flight.departureGate }"
+        role="cell"
       >
         {{ flight.departureGate ? flight.departureGate.number : '' }}</span
       >
-      <span class="departures-table__cell"><FlightStatus :status="flight.status" /></span>
+      <span class="departures-table__cell" role="cell"><FlightStatus :status="flight.status" /></span>
     </div>
   </div>
 </template>

@@ -124,10 +124,11 @@ export default {
   margin: 20px 0px;
   border-radius: $border-radius;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  position: relative;
 
   &__flight-select {
-    border-radius: $border-radius;
     padding: 4px;
+    border-radius: $border-radius;
   }
 
   &__status-options {
@@ -138,6 +139,10 @@ export default {
 
   &__status-option {
     font-weight: 500;
+  }
+
+  input[type='radio'] {
+    accent-color: #000;
   }
 
   &__status-input {
@@ -161,7 +166,12 @@ export default {
 
   &__error-message {
     color: $status-red;
+    font-size: 0.9rem;
     text-align: center;
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    width: 100%;
   }
 
   @include breakpoint('small') {
